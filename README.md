@@ -37,7 +37,7 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 
 ## 📦 Installation
 
-Drop a release in your html file and you're ready to go!
+Drop a [release](https://github.com/marsbos/flynt.js/releases/tag/v1.0.0) in your html file and you're ready to go!
 
 ```html
 <body>
