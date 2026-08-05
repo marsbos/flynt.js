@@ -39,6 +39,20 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 
 Drop a release in your html file and you're ready to go!
 
+```html
+<body>
+    <main>
+      ...
+    </main>
+    <script src="[path-to-flynt.min.js]"></script>
+    <script>
+      window.myPresenter = fx.presenter(({ createState, render, map }) => {
+        ...
+    </script>    
+  ....
+</body>
+```
+
 ## 💡 Quick Start
 
 ### 1. The Clean HTML
