@@ -37,11 +37,23 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 
 ## 📦 Installation
 
-Drop it into your page via CDN or link it locally — no build step required!
+Drop a [release](https://github.com/marsbos/flynt.js/releases) in your html file and you're ready to go!
 
 ```html
-<script src="[https://cdn.jsdelivr.net/npm/flyntjs@1.0.0/dist/flynt.min.js](https://cdn.jsdelivr.net/npm/flyntjs@1.0.0/dist/flynt.min.js)"></script>
+<body>
+    <main>
+      ...
+    </main>
+    <script src="[path-to-flynt.min.js]"></script>
+    <script>
+      window.myPresenter = fx.presenter(({ createState, render, map }) => {
+        ...
+    </script>    
+  ....
+</body>
 ```
+
+#### 💡Take a look at the examples folder to get an idea of what flynt.js is capable of...
 
 ## 💡 Quick Start
 
