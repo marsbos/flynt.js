@@ -100,6 +100,58 @@ Define your state and bind DOM elements cleanly using closures.
 </script>
 ```
 
+## Mechanics
+
+### How state works
+Flynt.js uses **Fine-Grained Microtask Reactivity** powered by native JavaScript `Object.defineProperty` getters and setters.
+
+```
+State Change  ──>  Dependency Tracking  ──>  Microtask Batching  ──>  DOM Render
+```
+
+* **Getter-Based Dependency Tracking:** When a property inside your `createState` object is read inside a `render()` block, Flynt.js automatically registers that property as a dependency.
+* **Microtask Batching:** Multiple state mutations in the same execution cycle (e.g., updating `state.count` and `state.name` right after each other) are batched together via `queueMicrotask()`. Your DOM updates only **once** per cycle.
+* **No Virtual DOM:** Flynt.js mutates the actual DOM directly where needed—giving you raw browser performance with zero abstraction overhead.
+
+#### Function Updates
+You can update state directly or pass a function to derive the new value based on the previous state:
+
+```javascript
+// Direct update
+state.count = 5;
+
+// Function update (receives current value)
+state.count = (prev) => prev + 1;
+```
+
+### How DOM Binding Works (`data-fx`)
+
+Flynt.js bridges your JavaScript presenters to the HTML DOM using the `data-fx` attribute. When the page loads, Flynt automatically scans the document, resolves the method path on `window`, and passes the matched DOM element directly to your presenter function.
+
+```html
+<!-- HTML -->
+<div data-fx="productPresenter.productListing"></div>
+// JavaScript
+window.productPresenter = fx.presenter(({ createState, render }) => {
+  return {
+    // Flynt executes this automatically and passes the <div> element as 'el'
+    productListing(el) {
+      render(() => {
+        el.textContent = "Bound and reactive!";
+      });
+    }
+  };
+});
+```
+
+* Zero Config Scanning: No manual document.querySelector or initialization calls required.
+
+* Nested Path Resolution: Dot notation is fully supported (e.g., data-fx="shop.catalog.productPresenter.item").
+
+* Explicit Errors: If a specified path or method doesn't exist on window, Flynt immediately throws a clear console error to speed up debugging.
+
+
+
 ## ⚡ Real-World Example: Master-Detail List with Pagination
 
 Flynt.js effortlessly handles complex asynchronous workflows, nested reactivity, state-driven UI disabled modifiers, and keyed DOM updates.
