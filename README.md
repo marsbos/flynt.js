@@ -1,3 +1,5 @@
+![Flynt.js Logo](logo.svg)
+
 # Flynt.js ⚡
 
 > **Reactive presenters, fine-grained state, and keyed DOM reconciliation — in just ~1.6KB.**
