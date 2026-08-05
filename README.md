@@ -14,6 +14,8 @@ Flynt.js is an ultra-lightweight micro-engine designed for Multi-Page Applicatio
 
 It bridges the gap between raw Vanilla JS speed and modern reactive UIs **without dirtying your HTML templates** with verbose inline directives or forcing a heavy virtual DOM build step.
 
+> ⚠️ **Note:** flynt.js is for Multi-Page Applications (MPAs) ⚡ It is **not** an SPA tool/lib/framework
+
 ---
 
 ## 🎯 Why Flynt.js?
