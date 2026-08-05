@@ -45,6 +45,13 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 
 ## 📦 Installation
 
+#### 1. CDN
+
+```html
+    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
+```
+
+#### 2. Releases
 Drop a [release](https://github.com/marsbos/flynt.js/releases) in your html file and you're ready to go!
 
 ```html
@@ -62,6 +69,9 @@ Drop a [release](https://github.com/marsbos/flynt.js/releases) in your html file
 ```
 
 #### 💡Take a look at the examples folder to get an idea of what flynt.js is capable of...
+
+Or, skip this longread go directly to some `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+
 
 ## 💡 Quick Start
 
