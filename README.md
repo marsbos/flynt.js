@@ -37,11 +37,7 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 
 ## 📦 Installation
 
-Drop it into your page via CDN or link it locally — no build step required!
-
-```html
-<script src="[https://cdn.jsdelivr.net/npm/flyntjs@1.0.0/dist/flynt.min.js](https://cdn.jsdelivr.net/npm/flyntjs@1.0.0/dist/flynt.min.js)"></script>
-```
+Drop the release in your html file and you're ready to go!
 
 ## 💡 Quick Start
 
