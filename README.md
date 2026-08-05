@@ -73,6 +73,8 @@ Drop a [release](https://github.com/marsbos/flynt.js/releases) in your html file
 
 #### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
 
+> More demo's coming soon...
+
 
 ## 💡 Quick Start
 
