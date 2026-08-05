@@ -1,10 +1,14 @@
+![Bundle Size](https://img.shields.io/badge/size-1.6KB%20minified-brightgreen?style=for-the-badge&logo=javascript)
+![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+
 <p align="center">
-  <img src="logo.svg" alt="Flynt.js Logo" width="60" height="auto" />
+  <img src="logo.svg" alt="Flynt.js Logo" width="80" height="auto" />
 </p>
 
 # Flynt.js ⚡
 
-> **Reactive presenters, fine-grained state, and keyed DOM reconciliation — in just ~1.6KB.**
+> **The ultra-lightweight (1.6KB minified) Presenter engine for HTML & MPAs.**
+> Fine-grained reactivity, array reconciliation, and zero-build setup in a single drop-in script.
 
 Flynt.js is an ultra-lightweight micro-engine designed for Multi-Page Applications (MPAs), e-commerce platforms (Magento/Hyvä, Shopify), and modern backend frameworks (Laravel, Rails, Django).
 
