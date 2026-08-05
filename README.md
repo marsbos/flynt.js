@@ -1,4 +1,3 @@
-![Flynt.js Logo](logo.svg)
 <p align="center">
   <img src="logo.svg" alt="Flynt.js Logo" width="100" height="auto" />
 </p>
