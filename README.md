@@ -68,9 +68,10 @@ Drop a [release](https://github.com/marsbos/flynt.js/releases) in your html file
 </body>
 ```
 
-#### 💡Take a look at the examples folder to get an idea of what flynt.js is capable of...
+## Examples
+#### 1. Examples folder in this repo
 
-Or, skip this longread go directly to some `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+#### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
 
 
 ## 💡 Quick Start
