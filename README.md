@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" alt="Flynt.js Logo" width="100" height="auto" />
+  <img src="logo.svg" alt="Flynt.js Logo" width="60" height="auto" />
 </p>
 
 # Flynt.js ⚡
