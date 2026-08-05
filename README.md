@@ -100,7 +100,7 @@ Define your state and bind DOM elements cleanly using closures.
 </script>
 ```
 
-## Mechanics
+## ⚙️ Mechanics
 
 ### How state works
 Flynt.js uses **Fine-Grained Microtask Reactivity** powered by native JavaScript `Object.defineProperty` getters and setters.
