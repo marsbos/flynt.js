@@ -68,8 +68,8 @@ Drop a [release](https://github.com/marsbos/flynt.js/releases) in your html file
 </body>
 ```
 
-## Examples
-#### 1. Examples folder in this repo
+## 🧪 Examples
+#### 1. Browse the examples folder in this repo
 
 #### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
 
