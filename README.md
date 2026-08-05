@@ -53,6 +53,8 @@ Drop a release in your html file and you're ready to go!
 </body>
 ```
 
+#### 💡Take a look at the examples folder to get an idea of what flynt.js is capable of...
+
 ## 💡 Quick Start
 
 ### 1. The Clean HTML
