@@ -1,5 +1,7 @@
 ![Flynt.js Logo](logo.svg)
-
+<p align="center">
+  <img src="logo.svg" alt="Flynt.js Logo" width="100" height="auto" />
+</p>
 # Flynt.js ⚡
 
 > **Reactive presenters, fine-grained state, and keyed DOM reconciliation — in just ~1.6KB.**
