@@ -123,6 +123,20 @@ state.count = 5;
 // Function update (receives current value)
 state.count = (prev) => prev + 1;
 ```
+#### Array Updates
+> ⚠️ **Note:** Array properties in your state must be updated **immutably**! Mutating an array directly (e.g., via `push`, `pop`, or `splice`) will not trigger a reactivity re-render. Always assign a fresh array instance:
+
+```javascript
+// ❌ Don't mutate directly
+state.items.push(newItem); 
+
+// ✅ Update immutably with spread syntax
+state.items = [...state.items, newItem];
+
+// ✅ Or filter/map immutably
+state.items = state.items.filter(item => item.id !== targetId);
+```
+
 
 ### How DOM Binding Works (`data-fx`)
 
