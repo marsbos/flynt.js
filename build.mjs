@@ -20,11 +20,7 @@ const options = {
 
 const minified = await minify(code, options);
 
-if (!fs.existsSync("./dist")) {
-  fs.mkdirSync("./dist", { recursive: true });
-}
+fs.writeFileSync("./flynt.min.js", minified.code);
 
-fs.writeFileSync("./dist/flynt.min.js", minified.code);
-
-const stats = fs.statSync("./dist/flynt.min.js");
+const stats = fs.statSync("./flynt.min.js");
 console.log(`Build success: ${stats.size} bytes`);
