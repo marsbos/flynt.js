@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>flynt.js - List demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-8 bg-gray-50 text-gray-900">
+    <main>
+      <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
+        <h1 class="text-xl font-bold mb-4">List example</h1>
+        <div class="flex gap-3 justify-end mb-3 items-center">
+          <span class="text-gray-500 text-sm">Sort</span>
+          <select
+            id="sort"
+            class="p-2 border border-gray-200 text-sm rounded-lg"
+            data-fx="productPresenter.sortBtn"
+          >
+            <option selected value="price_asc">Price low-high</option>
+            <option value="price_desc">Price high-low</option>
+            <option value="title_asc">Name A-Z</option>
+            <option value="title_desc">Name Z-A</option>
+          </select>
+        </div>
+        <ul
+          class="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-5"
+          data-fx="productPresenter.productListing"
+        ></ul>
+        <div class="flex justify-center">
+          <button
+            class="px-4 py-2.5 bg-orange-400 hover:bg-orange-500 text-white active:scale-95 font-bold rounded-lg transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+            data-fx="productPresenter.loadMoreBtn"
+          >
+            Load more
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="../src/flynt.js"></script>
+    <script>
+      window.productPresenter = fx.presenter(({ createState, render, map }) => {
+        const state = createState({
+          loading: false,
+          products: [],
+          page: {
+            skip: 0,
+            limit: 10,
+          },
+          sort: {
+            order: "asc",
+            field: "price",
+          },
+        });
+
+        const getProducts = async (skip = 0) => {
+          state.loading = true;
+          try {
+            const data = await fetch(
+              `https://dummyjson.com/products?limit=10&skip=${skip}&select=title,price&sortBy=${state.sort.field}&order=${state.sort.order}`,
+            ).then((res) => res.json());
+            if (skip === 0) {
+              state.products = data?.products ?? [];
+            } else {
+              state.products = [...state.products, ...data?.products];
+            }
+          } finally {
+            state.loading = false;
+          }
+        };
+
+        render(async () => {
+          const skip = state.page.skip;
+          await getProducts(skip);
+        });
+
+        return {
+          loadMoreBtn(el) {
+            el.onclick = () => (state.page.skip += 10);
+            render(() => {
+              el.disabled = state.loading;
+            });
+          },
+          productListing(el) {
+            const mapProducts = map(el);
+            render(() => {
+              const items = state.products?.map((prod) => ({
+                key: prod.id,
+                html: `<li class="cursor-pointer flex-col p-4 flex items-top justify-between gap-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-product-id="${prod.id}">
+                  <span class="text-gray-600 font-bold line-clamp-2">${prod.title}</span>
+                  <span class="text-orange-600 self-end">${prod.price}</span>
+                  </li>`,
+              }));
+              mapProducts(items);
+            });
+          },
+          sortBtn(el) {
+            el.onchange = (evt) => {
+              const [field, order] = evt.target.value?.split("_");
+              state.sort = {
+                field,
+                order,
+              };
+              state.page.skip = 0;
+            };
+          },
+        };
+      });
+    </script>
+  </body>
+</html>

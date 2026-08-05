@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>flynt.js - Counter demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../src/flynt.js"></script>
+  </head>
+  <body class="p-8 bg-gray-50 text-gray-900">
+    <script>
+      window.countPresenter = fx.presenter(({ createState, render }) => {
+        const state = createState({
+          count: 0,
+        });
+        return {
+          incrBtn(el) {
+            el.onclick = () => state.count++;
+          },
+          decrBtn(el) {
+            el.onclick = () => state.count--;
+          },
+          counter(el) {
+            render(() => {
+              el.innerText = `count=${state.count}`;
+            });
+          },
+        };
+      });
+    </script>
+
+    <main>
+      <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
+        <h1 class="text-xl font-bold mb-4">Counter example</h1>
+        <button
+          data-fx="countPresenter.incrBtn"
+          class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 active:scale-95 font-medium rounded-lg transition-all duration-150"
+        >
+          Increment
+        </button>
+        <button
+          data-fx="countPresenter.decrBtn"
+          class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 active:scale-95 font-medium rounded-lg transition-all duration-150"
+        >
+          Decrement
+        </button>
+        <span
+          data-fx="countPresenter.counter"
+          class="text-lg mt-3 block"
+        ></span>
+      </div>
+    </main>
+  </body>
+</html>

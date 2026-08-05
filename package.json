@@ -1,0 +1,27 @@
+{
+  "name": "flyntjs",
+  "version": "0.0.1",
+  "description": "Tiny reactivity for static html",
+  "keywords": [
+    "javscript"
+  ],
+  "license": "MIT",
+  "author": "bosmarcel@live.nl",
+  "type": "commonjs",
+  "main": "build.js",
+  "scripts": {
+    "dev": "vite",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "node build.mjs",
+    "watch": "terser src/flynt.js -o dist/flynt.min.js --compress --mangle --watch",
+    "format": "prettier --write \"src/**/*.{js,ts,html}\" \"examples/**/*.{js,ts,html}\"",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.8.4",
+    "rimraf": "^6.1.3",
+    "terser": "^5.48.0",
+    "vite": "^8.0.14"
+  }
+}
