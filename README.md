@@ -140,7 +140,7 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 
 | Feature                | Flynt.js                         | Alpine.js                   | React / Vue     |
 | :--------------------- | :------------------------------- | :-------------------------- | :-------------- |
-| **Bundle Size**        | **~1.6 KB minified**             | ~15 KB                      | ~40–130 KB      |
+| **Bundle Size**        | **~2.2 KB minified**             | ~15 KB                      | ~40–130 KB      |
 | **HTML Markup**        | **100% Clean** (`data-fx="..."`) | Inline (`x-data`, `x-init`) | JSX / Templates |
 | **DOM Reconciliation** | **Keyed Native Diffing**         | Full node morphing          | Virtual DOM     |
 | **Build Step**         | **None required**                | None required               | Required        |
@@ -150,7 +150,7 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 
 ## 🚀 Key Features
 
-- 📦 **Microscopic Footprint:** Under 1.6KB gzipped. Zero dependencies.
+- 📦 **Microscopic Footprint:** Under 2.2KB gzipped. Zero dependencies.
 - 🧹 **Clean HTML:** Zero JavaScript logic inside your markup — just clean, declarative `data-fx` attributes.
 - 🔄 **Fine-Grained Reactivity:** Automatic dependency tracking using native JS getters and setters.
 - ⚡ **Microtask Batching:** Multiple state mutations are batched into a single render frame for maximum performance.
