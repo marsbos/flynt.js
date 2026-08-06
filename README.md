@@ -59,6 +59,18 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
       });
     </script>
 ```
+---
+
+## 🧪 Examples
+#### 1. Browse the examples folder in this repo
+
+#### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+
+> More demo's coming soon...
+
+
+---
+
 
 ## 📖 API Reference
 
@@ -119,16 +131,6 @@ mapItems([{ key: 1, html: "<li>Item 1</li>" }]);
     * `response` *(Function)* — Custom response parser (default: `res => res.json()`). Useful for `res.text()`, `res.blob()`, etc.
     * `success` *(Function)* — Callback on success `(data) => {}`
     * `error` *(Function)* — Callback on HTTP, GraphQL, or network error `(err) => {}`
-
----
-
-## 🧪 Examples
-#### 1. Browse the examples folder in this repo
-
-#### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
-
-> More demo's coming soon...
-
 
 ---
 
