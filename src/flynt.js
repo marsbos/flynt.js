@@ -178,7 +178,6 @@ window.fx = {
 
           success?.(data);
         } catch (e) {
-          console.log("aboretd");
           if (e?.name !== "AbortError") {
             return error?.(e);
           }
