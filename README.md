@@ -66,24 +66,28 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
 `data-fx="PresenterName.methodName"`
 Binds a DOM element to a specific method inside a Presenter. Flynt.js automatically initializes the binding when the element is parsed.
 
+
 ### Core Methods
 `fx.presenter(setupFn)` Creates a new Presenter context.
 
-Parameters:
 
-setupFn (Function): A setup function receiving helpers { createState, render, map, debounce }. Must return an object with component/presenter methods.
+* **Parameters:** `function`
+  * setupFn (Function): A setup function receiving helpers { createState, render, map, debounce, request }. Must return an object with component/presenter methods.
 
 `createState(initialState)` Creates a reactive state object inside a Presenter context.
 Supports standard JavaScript getters for derived state.
 
-Parameters: initialState (Object)
+
+* **Parameters:** `object`
+  * initialState (Object)
 
 Returns: JS object that triggers re-renders when mutated.
 
 `render(callback)`
 Registers a reactive effect that automatically re-runs whenever accessed state properties change.
 
-Parameters: callback (Function) — The DOM update logic to run.
+* **Parameters:** `function`
+  * callback (Function) — The DOM update logic to run.
 
 `map(containerElement)` Higher-Order Factory for list reconciliation. Returns an itemsUpdater function tied to containerElement.
 
@@ -96,9 +100,19 @@ mapItems([{ key: 1, html: "<li>Item 1</li>" }]);
 - In-Place Updates: Only replaces elements whose outerHTML has changed.
 - Order Preservation: Uses insertBefore() to reorder nodes without losing focus or event listeners.
 
-`debounce(fn, delay)` Delays function execution until delay milliseconds have passed since the last invocation.
 
-Parameters: fn (Function), delay (Number)
+`debounce(fn, delay)` Delays function execution until delay milliseconds have passed since the last invocation.
+* **Parameters:** `function, number`
+  * fn (Function), delay (Number)
+
+`request(options)` An abortable fetch wrapper that automatically cancels pending requests to prevent race conditions. Automatically handles JSON payload formatting and GraphQL error responses.
+
+* **Parameters:** `options` *(Object)*
+  * `url` *(String)* — Target URL
+  * `method` *(String)* — HTTP method (default: `'GET'`)
+  * `body` *(Object|String)* — Request body (Objects are automatically stringified)
+  * `success` *(Function)* — Callback on success `(data) => {}`
+  * `error` *(Function)* — Callback on HTTP, GraphQL, or network error `(err) => {}`
 
 ---
 
