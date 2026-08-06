@@ -1,4 +1,4 @@
-![Bundle Size](https://img.shields.io/badge/size-1.6KB%20minified-brightgreen?style=for-the-badge&logo=javascript)
+![Bundle Size](https://img.shields.io/badge/size-2.2KB%20minified-brightgreen?style=for-the-badge&logo=javascript)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
 <p align="center">
@@ -11,10 +11,10 @@
 
 It organizes UI logic into clean, decoupled **Presenters** without the bloat, virtual DOM, or build step of full SPA frameworks.
 
-* **Built for MPAs:** Add interactivity to server-rendered HTML effortlessly.
+* **Built for MPAs:** Add reactivity to server-rendered HTML effortlessly.
 * **Presenter Pattern:** Decouple reactive state logic cleanly from your DOM.
-* **Zero Build Step:** Drop in a single CDN script tag and start coding.
-* **Zero Lifecycle & Cleanup:** No unmount hooks or cleanup overhead — browser garbage collection handles it naturally on page navigation.
+* **Zero Build Step & 2.2 kB:** Drop in a single tiny CDN script tag and start coding.
+* **Zero Lifecycle Overhead:** No unmount hooks or cleanup complexity — browser garbage collection handles it naturally on page navigation.
 
 ---
 
