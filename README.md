@@ -27,32 +27,35 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
 
 ### 2. Bind HTML (DOM)
 ```html
-<div data-fx="counterPresenter.counter">
-  <h1 data-target="display">0</h1>
-  <button data-action="inc">+1</button>
+<div>
+  <button data-fx="countPresenter.incrBtn">Increment</button>
+  <button data-fx="countPresenter.decrBtn">Decrement</button>
+  <span data-fx="countPresenter.counter"></span>
 </div>
 ```
 
 ### 3. Define Presenter (Logic)
 ```html
 <script>
-window.counterPresenter = fx.presenter(({ createState, render }) => {
-  const state = createState({ count: 0 });
-
-  return {
-    counter(el) {
-      const display = el.querySelector('[data-target="display"]');
-      const btn = el.querySelector('[data-action="inc"]');
-
-      btn.onclick = () => state.count++;
-
-      render(() => {
-        display.textContent = state.count;
+      window.countPresenter = fx.presenter(({ createState, render }) => {
+        const state = createState({
+          count: 0,
+        });
+        return {
+          incrBtn(el) {
+            el.onclick = () => state.count++;
+          },
+          decrBtn(el) {
+            el.onclick = () => state.count--;
+          },
+          counter(el) {
+            render(() => {
+              el.innerText = `count=${state.count}`;
+            });
+          },
+        };
       });
-    }
-  };
-});
-</script>
+    </script>
 ```
 
 ## 📖 API Reference
