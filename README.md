@@ -90,7 +90,9 @@ Registers a reactive effect that automatically re-runs whenever accessed state p
   * callback (Function) — The DOM update logic to run.
 
 `map(containerElement)` Higher-Order Factory for list reconciliation. Returns an itemsUpdater function tied to containerElement.
-
+* **Parameters:** `Element`
+  * element: A dom element acting as the container for the reconciliation operation
+  
 ```js
 const mapItems = map(containerElement);
 mapItems([{ key: 1, html: "<li>Item 1</li>" }]);
