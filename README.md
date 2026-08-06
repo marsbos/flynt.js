@@ -14,7 +14,7 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
 * **Built for MPAs:** Add interactivity to server-rendered HTML effortlessly.
 * **Presenter Pattern:** Decouple reactive state logic cleanly from your DOM.
 * **Zero Build Step:** Drop in a single CDN script tag and start coding.
-* **Zero lifecycle & cleanup:** No need for lifecycle and cleanup logic. Browser gc cleans up on every page load.
+* **Zero Lifecycle & Cleanup:** No unmount hooks or cleanup overhead — browser garbage collection handles it naturally on page navigation.
 
 ---
 
