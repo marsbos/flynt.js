@@ -5,7 +5,7 @@ window.fx = {
 
     const queue = new Set();
     // Batching
-    const batch = (pathSubscribers) => {
+    const _batch = (pathSubscribers) => {
       pathSubscribers.forEach((subscriber) => queue.add(subscriber));
 
       if (!pendingStateUpdates) {
@@ -25,7 +25,7 @@ window.fx = {
     };
 
     // State util
-    const createState = (obj) => {
+    const _createState = (obj) => {
       const descriptors = Object.getOwnPropertyDescriptors(obj);
 
       Object.keys(descriptors).forEach((key) => {
@@ -35,7 +35,7 @@ window.fx = {
 
         const makeNestedState = (v) => {
           if (v !== null && typeof v === "object" && !Array.isArray(v)) {
-            createState(v);
+            _createState(v);
           }
         };
         makeNestedState(value);
@@ -60,7 +60,7 @@ window.fx = {
             if (value !== newValue) {
               makeNestedState(newValue);
               value = newValue;
-              batch(subscribers);
+              _batch(subscribers);
             }
           },
         });
@@ -70,7 +70,7 @@ window.fx = {
     };
 
     // Render/effect tracking
-    const runEffect = (fn) => {
+    const _render = (fn) => {
       const update = () => {
         activeEffect = update;
         fn();
@@ -79,7 +79,7 @@ window.fx = {
       update();
     };
     // Debounce utility
-    const debounce = (fn, ms) => {
+    const _debounce = (fn, ms) => {
       let timerId = undefined;
       return (...args) => {
         if (timerId) clearTimeout(timerId);
@@ -90,7 +90,7 @@ window.fx = {
     };
 
     // Array map utility
-    const map = (element) => {
+    const _mapHoc = (element) => {
       const currentItems = new Map();
       return (items) => {
         if (!Array.isArray(items)) return;
@@ -133,8 +133,69 @@ window.fx = {
         });
       };
     };
+    const _fetchHelper = () => {
+      let ctrl;
+      return async ({
+        url,
+        method,
+        body,
+        headers,
+        success,
+        error,
+        response,
+        loading,
+      }) => {
+        ctrl?.abort();
+        ctrl = new AbortController();
+        try {
+          loading?.(true);
+          const res = await fetch(url, {
+            method: method ?? "GET",
+            headers: {
+              ...(body && { "Content-Type": "application/json" }),
+              ...headers,
+            },
+            ...(body && {
+              body: typeof body === "object" ? JSON.stringify(body) : body,
+            }),
+            signal: ctrl.signal,
+          });
+
+          if (!res.ok) {
+            return error({
+              status: res.status,
+              message: res.statusText,
+            });
+          }
+
+          const parseFn =
+            typeof response === "function" ? response : (r) => r.json();
+          const data = await parseFn(res);
+
+          if (data?.errors) {
+            return error?.(data.errors);
+          }
+
+          success?.(data);
+        } catch (e) {
+          console.log("aboretd");
+          if (e?.name !== "AbortError") {
+            return error?.(e);
+          }
+        } finally {
+          if (!ctrl.signal.aborted) loading?.(false);
+        }
+      };
+    };
+
     // Create the presenter
-    return cb({ createState, debounce, render: runEffect, map });
+    return cb({
+      createState: _createState,
+      debounce: _debounce,
+      render: _render,
+      map: _mapHoc,
+      request: _fetchHelper,
+    });
   },
 };
 

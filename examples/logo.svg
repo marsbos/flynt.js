@@ -1,0 +1,13 @@
+  <svg viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad2" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="20%" stop-color="#fa3917" />
+                                <stop offset="90%" stop-color="#ff8c00" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            d="M 8.25,3.2 V 7.5 H 15.63 L 19.27,3.2 Z M 3.55,7.9 V 12.2 H 7.85 V 7.9 Z M 8.25,12.6 V 16.85 H 10.64 L 14.22,12.6 Z M 3.55,17.22 V 21.52 H 7.85 V 17.22 Z"
+                            fill="url(#grad2)"
+                            fill-rule="evenodd"
+                        />
+                    </svg>

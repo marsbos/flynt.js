@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>flynt.js - Request helper demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
+  </head>
+  <body class="p-8 bg-gray-50 text-gray-900">
+    <script>
+      window.searchPresenter = fx.presenter(
+        ({ createState, render, request, debounce, map }) => {
+          const state = createState({
+            loading: false,
+            query: "",
+            results: [],
+          });
+
+          const searchRequest = request();
+          const queryProducts = (q) => {
+            if (!q || q?.length < 3) {
+              state.results = [];
+              return;
+            }
+            searchRequest({
+              url: `https://dummyjson.com/products/search?q=${q}`,
+              loading: (loading) => {
+                state.loading = loading;
+              },
+              success: (data) => {
+                state.results = data?.products || [];
+              },
+              error: (err) => {
+                console.error(err);
+              },
+            });
+          };
+
+          return {
+            queryInput(el) {
+              el.oninput = debounce((evt) => {
+                queryProducts(evt.target.value);
+              }, 300);
+            },
+            resultsList(el) {
+              const mapProducts = map(el);
+              render(() => {
+                if (state.loading) el.innerHTML = `<li>Loading...</li>`;
+              });
+
+              render(() => {
+                const items = state.results?.map((prod) => ({
+                  key: prod.id,
+                  html: `<li class="cursor-pointer flex-col p-4 flex items-top justify-between gap-3 border border-gray-200 rounded-lg hover:bg-gray-50" data-product-id="${prod.id}">
+                  <span class="text-gray-600 font-bold line-clamp-2">${prod.title}</span>
+                  <span class="text-orange-600 self-end">${prod.price}</span>
+                  </li>`,
+                }));
+                mapProducts(items);
+              });
+            },
+          };
+        },
+      );
+    </script>
+
+    <main>
+      <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
+        <h1 class="text-xl font-bold mb-4">Debounced request helper example</h1>
+        <div>
+          <label class="select-none flex flex-col gap-2">
+            <span class="text-gray-500 text-sm font-bold">Query</span>
+            <input
+              placeholder="Type query to search..."
+              class="border-gray-200 border rounded-md p-2"
+              data-fx="searchPresenter.queryInput"
+            />
+          </label>
+        </div>
+        <ul
+          class="grid grid-cols-2 lg:grid-cols-3 gap-2 my-5"
+          data-fx="searchPresenter.resultsList"
+        ></ul>
+      </div>
+    </main>
+  </body>
+</html>

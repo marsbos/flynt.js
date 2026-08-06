@@ -4,13 +4,21 @@
     <meta charset="UTF-8" />
     <title>flynt.js - Counter demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../src/flynt.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
   </head>
   <body class="p-8 bg-gray-50 text-gray-900">
+    <header class="py-4">
+      <p align="center">
+        <img src="./logo.svg" alt="Flynt.js Logo" width="50" height="auto" />
+      </p>
+    </header>
     <script>
       window.countPresenter = fx.presenter(({ createState, render }) => {
         const state = createState({
           count: 0,
+          get double() {
+            return this.count * 2;
+          },
         });
         return {
           incrBtn(el) {
@@ -24,29 +32,39 @@
               el.innerText = `count=${state.count}`;
             });
           },
+          counterDbl(el) {
+            render(() => {
+              el.innerText = `dbl-count=${state.double}`;
+            });
+          },
         };
       });
     </script>
 
     <main>
       <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
-        <h1 class="text-xl font-bold mb-4">Counter example</h1>
-        <button
-          data-fx="countPresenter.incrBtn"
-          class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 active:scale-95 font-medium rounded-lg transition-all duration-150"
-        >
-          Increment
-        </button>
-        <button
-          data-fx="countPresenter.decrBtn"
-          class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 active:scale-95 font-medium rounded-lg transition-all duration-150"
-        >
-          Decrement
-        </button>
-        <span
-          data-fx="countPresenter.counter"
-          class="text-lg mt-3 block"
-        ></span>
+        <h1 class="text-xl font-bold mb-4">
+          Counter example - with derived state
+        </h1>
+        <div>
+          <button
+            data-fx="countPresenter.incrBtn"
+            class="px-4 py-2.5 bg-orange-400 hover:bg-orange-500 text-white active:scale-95 font-bold rounded-lg transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+          >
+            Increment
+          </button>
+          <button
+            data-fx="countPresenter.decrBtn"
+            class="px-4 py-2.5 bg-orange-400 hover:bg-orange-500 text-white active:scale-95 font-bold rounded-lg transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+          >
+            Decrement
+          </button>
+          <span data-fx="countPresenter.counter"></span>
+          <span
+            class="text-orange-500"
+            data-fx="countPresenter.counterDbl"
+          ></span>
+        </div>
       </div>
     </main>
   </body>

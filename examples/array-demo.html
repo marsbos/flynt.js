@@ -2,13 +2,18 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
-    <title>flynt.js - List demo</title>
+    <title>flynt.js - Array map demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="p-8 bg-gray-50 text-gray-900">
+    <header class="py-4">
+      <p align="center">
+        <img src="./logo.svg" alt="Flynt.js Logo" width="50" height="auto" />
+      </p>
+    </header>
     <main>
       <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
-        <h1 class="text-xl font-bold mb-4">List example</h1>
+        <h1 class="text-xl font-bold mb-4">Array map example</h1>
         <div class="flex gap-3 justify-end mb-3 items-center">
           <span class="text-gray-500 text-sm">Sort</span>
           <select
@@ -37,7 +42,8 @@
       </div>
     </main>
 
-    <script src="../src/flynt.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
+
     <script>
       window.productPresenter = fx.presenter(({ createState, render, map }) => {
         const state = createState({
