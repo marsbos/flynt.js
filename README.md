@@ -22,7 +22,7 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
 
 ### 1. Include script
 ```html
-<script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@v1.0.1/flynt.min.js"></script>
 ```
 
 ### 2. Bind HTML (DOM)
