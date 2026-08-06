@@ -5,16 +5,101 @@
   <img src="logo.svg" alt="Flynt.js Logo" width="80" height="auto" />
 </p>
 
-# Flynt.js ⚡
+# ⚡️ Flynt.js
 
-> **The ultra-lightweight (1.6KB minified) Presenter engine for HTML & MPAs.**
-> Fine-grained reactivity, array reconciliation, and zero-build setup in a single drop-in script.
+**Flynt.js** is a lightweight, zero-build reactivity library built specifically for **Multi-Page Applications (MPAs)** like Magento/Hyvä, Blade, or WordPress. 
 
-Flynt.js is an ultra-lightweight micro-engine designed for Multi-Page Applications (MPAs), e-commerce platforms (Magento/Hyvä, Shopify), and modern backend frameworks (Laravel, Rails, Django).
+It organizes UI logic into clean, decoupled **Presenters** without the bloat, virtual DOM, or build step of full SPA frameworks.
 
-It bridges the gap between raw Vanilla JS speed and modern reactive UIs **without dirtying your HTML templates** with verbose inline directives or forcing a heavy virtual DOM build step.
+* **Built for MPAs:** Add interactivity to server-rendered HTML effortlessly.
+* **Presenter Pattern:** Decouple reactive state logic cleanly from your DOM.
+* **Zero Build Step:** Drop in a single CDN script tag and start coding.
+* **Zero lifecycle & cleanup:** No need for lifecycle and cleanup logic. Browser gc cleans up on every page load.
 
-> ⚠️ **Note:** flynt.js is for Multi-Page Applications (MPAs) ⚡ It is **not** an SPA tool/lib/framework
+---
+
+## 💻 Quick Start
+
+### 1. Include script
+```html
+<script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
+```
+
+### 2. Bind HTML (DOM)
+```html
+<div data-fx="counterPresenter.counter">
+  <h1 data-target="display">0</h1>
+  <button data-action="inc">+1</button>
+</div>
+```
+
+### 3. Define Presenter (Logic)
+```html
+<script>
+window.counterPresenter = fx.presenter(({ createState, render }) => {
+  const state = createState({ count: 0 });
+
+  return {
+    counter(el) {
+      const display = el.querySelector('[data-target="display"]');
+      const btn = el.querySelector('[data-action="inc"]');
+
+      btn.onclick = () => state.count++;
+
+      render(() => {
+        display.textContent = state.count;
+      });
+    }
+  };
+});
+</script>
+```
+
+## 📖 API Reference
+
+### DOM Attribute
+`data-fx="PresenterName.methodName"`
+Binds a DOM element to a specific method inside a Presenter. Flynt.js automatically initializes the binding when the element is parsed.
+
+### Core Methods
+`fx.presenter(setupFn)` Creates a new Presenter context.
+
+Parameters:
+
+setupFn (Function): A setup function receiving helpers { createState, render, map }. Must return an object with component/presenter methods.
+
+`createState(initialState)` Creates a reactive state object inside a Presenter context.
+
+Parameters: initialState (Object)
+
+Returns: JS object that triggers re-renders when mutated.
+
+`render(callback)`
+Registers a reactive effect that automatically re-runs whenever accessed state properties change.
+
+Parameters: callback (Function) — The DOM update logic to run.
+
+`map(containerElement)` Higher-Order Factory for list reconciliation. Returns an itemsUpdater function tied to containerElement.
+
+```js
+const mapItems = map(containerElement);
+mapItems([{ key: 1, html: "<li>Item 1</li>" }]);
+```
+
+- $O(1)$ Lookup Cache: Retains physical DOM references across renders.
+- In-Place Updates: Only replaces elements whose outerHTML has changed.
+- Order Preservation: Uses insertBefore() to reorder nodes without losing focus or event listeners.
+
+
+---
+
+## 🧪 Examples
+#### 1. Browse the examples folder in this repo
+
+#### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+
+> More demo's coming soon...
+
 
 ---
 
@@ -43,81 +128,6 @@ Flynt.js takes a different path: **Keep HTML clean, keep code structured, keep b
 - 🧩 **Keyed List Reconciliation:** Built-in `map()` helper for $O(1)$ lookup and in-place DOM updates for dynamic arrays.
 - 🧠 **Zero Magic:** ~165 lines of clean JS that any developer can inspect and master in 10 minutes.
 
----
-
-## 📦 Installation
-
-#### 1. CDN
-
-```html
-    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
-```
-
-#### 2. Releases
-Drop a [release](https://github.com/marsbos/flynt.js/releases) in your html file and you're ready to go!
-
-```html
-<body>
-    <main>
-      ...
-    </main>
-    <script src="[path-to-flynt.min.js]"></script>
-    <script>
-      window.myPresenter = fx.presenter(({ createState, render, map }) => {
-        ...
-    </script>    
-  ....
-</body>
-```
-
-## 🧪 Examples
-#### 1. Browse the examples folder in this repo
-
-#### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
-
-> More demo's coming soon...
-
-
-## 💡 Quick Start
-
-### 1. The Clean HTML
-
-Keep your markup readable and separation-of-concerns intact.
-
-```html
-<main class="card">
-  <h1>Counter Demo</h1>
-  <button data-fx="counterPresenter.decrementBtn">-</button>
-  <span data-fx="counterPresenter.countOutput">0</span>
-  <button data-fx="counterPresenter.incrementBtn">+</button>
-</main>
-```
-
-### 2. The JavaScript Presenter
-
-Define your state and bind DOM elements cleanly using closures.
-
-```html
-<script>
-  window.counterPresenter = fx.presenter(({ createState, render }) => {
-    const state = createState({ count: 0 });
-
-    return {
-      decrementBtn(el) {
-        el.onclick = () => state.count--;
-      },
-      incrementBtn(el) {
-        el.onclick = () => state.count++;
-      },
-      countOutput(el) {
-        render(() => {
-          el.innerText = state.count;
-        });
-      },
-    };
-  });
-</script>
-```
 
 ## ⚙️ The Mechanics
 
@@ -258,33 +268,7 @@ Flynt.js effortlessly handles complex asynchronous workflows, nested reactivity,
 </script>
 ```
 
-## 📚 API Reference
-
-`fx.presenter(setupFn)`
-
-Initializes a Flynt.js presenter closure. setupFn receives a context object containing { createState, render, map, debounce }.
-
-`createState(initialObject)`
-
-Creates a reactive state proxy. Any reads during a render() scope register as dependencies. Any writes trigger microtask-batched effect updates.
-
-`render(effectCallback)`
-
-Executes the effectCallback immediately, recording any state dependencies accessed inside. Whenever those dependencies mutate, effectCallback automatically re-runs.
-
-`map(containerElement)`
-
-Higher-Order Factory for list reconciliation. Returns an itemsUpdater function tied to containerElement.
-
-```js
-const mapItems = map(containerElement);
-mapItems([{ key: 1, html: "<li>Item 1</li>" }]);
-```
-
-- $O(1)$ Lookup Cache: Retains physical DOM references across renders.
-- In-Place Updates: Only replaces elements whose outerHTML has changed.
-- Order Preservation: Uses insertBefore() to reorder nodes without losing focus or event listeners.
-
 ## ⚖️ License
+MIT © Marcel Bos
 
 Distributed under the MIT License. Free for commercial and non-commercial use.
