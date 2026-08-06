@@ -40,6 +40,8 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
       window.countPresenter = fx.presenter(({ createState, render }) => {
         const state = createState({
           count: 0,
+          // Derived state via standard JS getters
+          get double() { return this.count * 2; }
         });
         return {
           incrBtn(el) {
@@ -50,7 +52,7 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
           },
           counter(el) {
             render(() => {
-              el.innerText = `count=${state.count}`;
+              el.innerText = `count=${state.count}, double=${state.double}`;
             });
           },
         };
@@ -69,9 +71,10 @@ Binds a DOM element to a specific method inside a Presenter. Flynt.js automatica
 
 Parameters:
 
-setupFn (Function): A setup function receiving helpers { createState, render, map }. Must return an object with component/presenter methods.
+setupFn (Function): A setup function receiving helpers { createState, render, map, debounce }. Must return an object with component/presenter methods.
 
 `createState(initialState)` Creates a reactive state object inside a Presenter context.
+Supports standard JavaScript getters for derived state.
 
 Parameters: initialState (Object)
 
@@ -93,6 +96,9 @@ mapItems([{ key: 1, html: "<li>Item 1</li>" }]);
 - In-Place Updates: Only replaces elements whose outerHTML has changed.
 - Order Preservation: Uses insertBefore() to reorder nodes without losing focus or event listeners.
 
+`debounce(fn, delay)` Delays function execution until delay milliseconds have passed since the last invocation.
+
+Parameters: fn (Function), delay (Number)
 
 ---
 
