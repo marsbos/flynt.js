@@ -113,6 +113,7 @@ mapItems([{ key: 1, html: "<li>Item 1</li>" }]);
   * `url` *(String)* — Target URL
   * `method` *(String)* — HTTP method (default: `'GET'`)
   * `body` *(Object|String)* — Request body (Objects are automatically stringified)
+  * `response` *(Function)* — Custom response parser (default: `res => res.json()`). Useful for `res.text()`, `res.blob()`, etc.
   * `success` *(Function)* — Callback on success `(data) => {}`
   * `error` *(Function)* — Callback on HTTP, GraphQL, or network error `(err) => {}`
 
