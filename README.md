@@ -62,9 +62,10 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
 ---
 
 ## 🧪 Examples
-#### 1. Browse the examples folder in this repo
 
-#### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+#### 1. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+
+#### 2. Browse the examples folder in this repo
 
 > More demo's coming soon...
 
