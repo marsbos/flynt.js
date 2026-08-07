@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <title>flynt.js - Request helper demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@v1.0.1/flynt.min.js"></script>
   </head>
   <body class="p-8 bg-gray-50 text-gray-900">
+    <header class="py-4">
+      <p align="center">
+        <img src="./logo.svg" alt="Flynt.js Logo" width="50" height="auto" />
+      </p>
+    </header>
     <script>
       window.searchPresenter = fx.presenter(
         ({ createState, render, request, debounce, map }) => {
@@ -44,9 +49,6 @@
             },
             resultsList(el) {
               const mapProducts = map(el);
-              render(() => {
-                if (state.loading) el.innerHTML = `<li>Loading...</li>`;
-              });
 
               render(() => {
                 const items = state.results?.map((prod) => ({

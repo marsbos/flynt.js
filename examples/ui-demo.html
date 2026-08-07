@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>flynt.js - UI elements demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@v1.0.1/flynt.min.js"></script>
+  </head>
+  <body class="p-8 bg-gray-50 text-gray-900">
+    <header class="py-4">
+      <p align="center">
+        <img src="./logo.svg" alt="Flynt.js Logo" width="50" height="auto" />
+      </p>
+    </header>
+    <script>
+      window.dropdownPresenter = fx.presenter(({ createState, render }) => {
+        const state = createState({
+          dropdownOpen: false,
+        });
+        document.addEventListener("click", (evt) => {
+          if (
+            state.dropdownOpen &&
+            !evt.target.closest("[data-fx^='dropdownPresenter']")
+          ) {
+            state.dropdownOpen = false;
+          }
+        });
+
+        return {
+          dropdownBtn(el) {
+            el.onclick = (evt) => {
+              state.dropdownOpen = !state.dropdownOpen;
+            };
+            render(() => el.setAttribute("aria-expanded", state.dropdownOpen));
+          },
+          dropdownMenu(el) {
+            render(() => {
+              el.classList.toggle("hidden", !state.dropdownOpen);
+            });
+          },
+        };
+      });
+
+      window.ratingPresenter = fx.presenter(({ createState, render }) => {
+        const state = createState({
+          rating: 0,
+          hoverRating: 0,
+        });
+        return {
+          ratingContainer(el) {
+            const stars = Array.from(el.querySelectorAll("svg"));
+            state.rating = Number(el.dataset.rating ?? 0);
+            el.onmousemove = (evt) => {
+              const star = evt.target.closest("svg");
+              if (star) {
+                state.hoverRating = stars.indexOf(star) + 1;
+              }
+            };
+
+            el.onclick = (evt) => {
+              const star = evt.target.closest("svg");
+              if (star) {
+                state.rating = stars.indexOf(star) + 1;
+              }
+            };
+            el.onmouseleave = () => {
+              state.hoverRating = 0;
+            };
+            render(() => {
+              const activeCount = state.hoverRating || state.rating;
+              stars.forEach((star, index) => {
+                star.classList.toggle("fill-yellow-400", index < activeCount);
+              });
+            });
+          },
+        };
+      });
+    </script>
+
+    <main>
+      <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
+        <h1 class="text-xl font-bold mb-4">UI elements example</h1>
+
+        <div class="flex flex-col lg:flex-row gap-12 items-start">
+          <div class="flex flex-col gap-4">
+            <h3>Dropdown component</h3>
+            <div class="relative inline-block text-left">
+              <!-- Dropdown toggle -->
+              <button
+                data-fx="dropdownPresenter.dropdownBtn"
+                class="rounded-lg bg-orange-500 px-4 py-2 text-white hover:bg-orange-600"
+              >
+                Menu
+              </button>
+              <!-- Dropdown menu -->
+              <div
+                id="dropdown"
+                data-fx="dropdownPresenter.dropdownMenu"
+                class="absolute left-0 mt-2 w-48 rounded-md bg-white p-2 shadow-lg ring-1 ring-black/5 z-10"
+              >
+                <a
+                  href="#"
+                  class="block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Profile</a
+                >
+                <a
+                  href="#"
+                  class="block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Settings</a
+                >
+                <a
+                  href="#"
+                  class="block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Logout</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <h3>Rating component</h3>
+            <div
+              data-fx="ratingPresenter.ratingContainer"
+              data-rating="3"
+              class="flex cursor-pointer"
+            >
+              <svg
+                class="w-12 h-12 text-gray-300 fill-current transition-colors"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+              <svg
+                class="w-12 h-12 text-gray-300 fill-current transition-colors"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+              <svg
+                class="w-12 h-12 text-gray-300 fill-current transition-colors"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+              <svg
+                class="w-12 h-12 text-gray-300 fill-current transition-colors"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+              <svg
+                class="w-12 h-12 text-gray-300 fill-current transition-colors"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

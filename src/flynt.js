@@ -1,4 +1,24 @@
+const _scanOnReady = () => {
+  Array.from(document.querySelectorAll("[data-fx]")).forEach((el) => {
+    const [p, ...rest] = el.dataset.fx?.split(".") ?? [];
+    const prApi = window[p];
+
+    const presenter = rest.reduce((memo, curr) => {
+      const k = memo[curr];
+      if (!k) {
+        throw new Error(`No presenter found for '${curr}'!`);
+      }
+      return k;
+    }, prApi || {});
+
+    if (typeof presenter === "function") {
+      presenter(el);
+    }
+  });
+};
+
 window.fx = {
+  scan: _scanOnReady,
   presenter(cb) {
     let activeEffect = null;
     let pendingStateUpdates = false;
@@ -197,26 +217,6 @@ window.fx = {
     });
   },
 };
-
-const _scanOnReady = () => {
-  Array.from(document.querySelectorAll("[data-fx]")).forEach((el) => {
-    const [p, ...rest] = el.dataset.fx?.split(".") ?? [];
-    const prApi = window[p];
-
-    const presenter = rest.reduce((memo, curr) => {
-      const k = memo[curr];
-      if (!k) {
-        throw new Error(`No presenter found for '${curr}'!`);
-      }
-      return k;
-    }, prApi || {});
-
-    if (typeof presenter === "function") {
-      presenter(el);
-    }
-  });
-};
-
 if (document.readyState !== "loading") {
   _scanOnReady();
 } else {
