@@ -1,5 +1,6 @@
-![Bundle Size](https://img.shields.io/badge/size-2.2KB%20minified-brightgreen?style=for-the-badge&logo=javascript)
-![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+![Bundle Size](https://img.shields.io/badge/size-2.2KB%20minified-brightgreen?style=fflat-square&logo=javascript)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)
 
 <p align="center">
   <img src="logo.svg" alt="Flynt.js Logo" width="80" height="auto" />
