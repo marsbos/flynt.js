@@ -22,7 +22,7 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
 
 ### 1. Include script
 ```html
-<script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@main/flynt.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/gh/marsbos/flynt.js@v1.0.1/flynt.min.js"></script>
 ```
 
 ### 2. Bind HTML (DOM)
@@ -62,9 +62,10 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
 ---
 
 ## 🧪 Examples
-#### 1. Browse the examples folder in this repo
 
-#### 2. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+#### 1. `Codepen` examples: [Flynt.js](https://codepen.io/collection/OyMeQW)
+
+#### 2. Browse the examples folder in this repo
 
 > More demo's coming soon...
 
