@@ -1,4 +1,4 @@
-![Bundle Size](https://img.shields.io/badge/size-2.2KB%20minified-brightgreen?style=fflat-square&logo=javascript)
+![Bundle Size](https://img.shields.io/badge/size-2.2KB%20minified-brightgreen?style=flat-square&logo=javascript)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)
 
