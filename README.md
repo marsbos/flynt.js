@@ -44,6 +44,7 @@ It organizes UI logic into clean, decoupled **Presenters** without the bloat, vi
           // Derived state via standard JS getters
           get double() { return this.count * 2; }
         });
+        // Each property is reusable, so you can use the same counter or incrBtn on multiple dom elements!
         return {
           incrBtn(el) {
             el.onclick = () => state.count++;
